@@ -82,9 +82,7 @@ const AppContextProvider : React.FC<{children : ReactNode}> = ({children}) =>{
             addFormula("industry")
 
     },[organizationType, ownershipStructure, industry, geographicScope, governanceModel, search])
-    useEffect(()=>{
-        console.log(formula)
-    },[formula])
+
     return (
         <AppContext.Provider value={{organizationType, setOrganizationType, ownershipStructure, setOwnershipStructure, industry, setIndustry, geographicScope, setGeographicScope, governanceModel, setGovernanceModel, search, setSearch, formula, setFormula}}>
             {children }
