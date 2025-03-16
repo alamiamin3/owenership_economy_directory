@@ -1,19 +1,39 @@
-import Filter from "./components/Filter";
-import Search from "./components/Search";
-import { IoFilterOutline } from "react-icons/io5";
-function App() {
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import Home from './components/Home';
+import ListItems from './components/ListItems';
+import AppContextProvider from './components/Context/AppContext';
 
+const Layout = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh w-full font-poppins bg-gradient-to-r from-violet-200 to-pink-200">
-      <div className="text-black flex flex-col gap-6 justify-center">
-          <h1 className="text-3xl font-semibold">Explore A Variety Of Organizations Within The Ownership Economy </h1>
-          <div className="self-center flex gap-6 items-center">
-            <Search/>
-            <Filter/>
-          </div>
-      </div>
+    <div className="flex  items-center justify-center min-h-svh w-full font-poppins ">
+      <Outlet />
     </div>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/organizations',
+        element: <ListItems/>,
+      },
+    ],
+  },
+]);
+
+function App() {
+  return(
+    <AppContextProvider>
+      <RouterProvider router={router} />;
+    </AppContextProvider>
   )
 }
 
-export default App
+export default App;
